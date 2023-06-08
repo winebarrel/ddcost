@@ -9,3 +9,12 @@ builds:
       - CGO_ENABLED=0
 checksum:
   name_template: "checksums.txt"
+brews:
+  - tap:
+      owner: winebarrel
+      name: homebrew-ddcost
+    homepage: https://github.com/winebarrel/ddcost
+    description: A tool that shows a breakdown of Datadog costs in a table.
+    license: MIT
+    install: |
+      bin.install 'ddcost'
