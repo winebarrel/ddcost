@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 
 	"github.com/alecthomas/kong"
@@ -14,12 +15,25 @@ var cli struct {
 	Version kong.VersionFlag
 }
 
+func init() {
+	log.SetFlags(0)
+}
+
 func main() {
 	kong.Parse(
 		&cli,
 		kong.Vars{"version": version},
 	)
 
-	client := ddcost.NewClient(&cli.Options)
-	client.PrintHistoricalCostByOrg(os.Stdout)
+	client, err := ddcost.NewClient(&cli.Options)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	err = client.PrintHistoricalCostByOrg(os.Stdout)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
