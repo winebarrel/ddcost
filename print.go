@@ -70,7 +70,7 @@ func printTable(resp *datadogV2.CostByOrgResponse, out io.Writer) {
 
 				for _, m := range months {
 					cost := costByMonth[m]
-					row = append(row, fmt.Sprintf("%f", cost))
+					row = append(row, fmt.Sprintf("%.2f", cost))
 				}
 
 				table.Append(row)
@@ -104,7 +104,7 @@ func printTSV(resp *datadogV2.CostByOrgResponse, out io.Writer) {
 
 				for _, m := range months {
 					cost := costByMonth[m]
-					row = append(row, fmt.Sprintf("%f", cost))
+					row = append(row, fmt.Sprintf("%.2f", cost))
 				}
 
 				fmt.Fprintln(out, strings.Join(row, "\t"))
