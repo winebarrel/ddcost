@@ -51,18 +51,6 @@ func (client *Client) withAPIKey(ctx context.Context) context.Context {
 	return ctx
 }
 
-// charge_type/month/cost
-type CostByMonth map[string]float64
-
-// charge_type/month/cost
-type CostByChargeType map[string]CostByMonth
-
-// product_name/charge_type/month/cost
-type CostByProduct map[string]CostByChargeType
-
-// org_name/product_name/charge_type/month/cost
-type CostBreakdown map[string]CostByProduct
-
 func (client *Client) PrintHistoricalCostByOrg(out io.Writer) {
 	ctx := client.withAPIKey(context.Background())
 
