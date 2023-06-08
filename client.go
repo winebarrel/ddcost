@@ -94,6 +94,10 @@ func (client *Client) PrintHistoricalCostByOrg(out io.Writer) error {
 		return err
 	}
 
+	if len(resp.Data) == 0 {
+		return errors.New("no data")
+	}
+
 	switch client.options.Output {
 	case "table":
 		printTable(&resp, out)
