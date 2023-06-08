@@ -10,13 +10,13 @@ A tool that shows a breakdown of Datadog costs in a table.
 Usage: ddcost --api-key=STRING --app-key=STRING
 
 Flags:
-  -h, --help                Show context-sensitive help.
-      --api-key=STRING      Datadog API key ($DD_API_KEY).
-      --app-key=STRING      Datadog APP key ($DD_APP_KEY).
-  -v, --view="summary"      Cost breakdown view (summary, sub-org).
-  -o, --output="table"      Formatting style for output (table, tsv, json).
-  -s, --start-month=TIME    Cost beginning this month (default: half a year ago).
-  -e, --end-month=TIME      Cost ending this month (default: this month).
+  -h, --help                  Show context-sensitive help.
+      --api-key=STRING        Datadog API key ($DD_API_KEY).
+      --app-key=STRING        Datadog APP key ($DD_APP_KEY).
+  -v, --view="summary"        Cost breakdown view (summary, sub-org).
+  -o, --output="table"        Formatting style for output (table, tsv, json).
+  -s, --start-month=STRING    Cost beginning this month (default: half a year ago).
+  -e, --end-month=STRING      Cost ending this month (default: this month).
       --version
 ```
 
