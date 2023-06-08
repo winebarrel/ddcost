@@ -1,6 +1,6 @@
 # ddcost
 
-[![test](https://github.com/winebarrel/ddcost/actions/workflows/build.yml/badge.svg)](https://github.com/winebarrel/ddcost/actions/workflows/build.yml)
+[![test](https://github.com/winebarrel/ddcost/actions/workflows/test.yml/badge.svg)](https://github.com/winebarrel/ddcost/actions/workflows/test.yml)
 
 A tool that shows a breakdown of Datadog costs in a table.
 
