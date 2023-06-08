@@ -17,7 +17,7 @@ func MapValueOrDefault[K comparable, V any](m map[K]V, key K, defval V) V {
 	return v
 }
 
-func EachEntryWithSort[K constraints.Ordered, V any](m map[K]V, f func(K, V, int)) {
+func MapSortKeys[K constraints.Ordered, V any](m map[K]V) []K {
 	keys := []K{}
 
 	for k := range m {
@@ -28,8 +28,5 @@ func EachEntryWithSort[K constraints.Ordered, V any](m map[K]V, f func(K, V, int
 		return keys[i] < keys[j]
 	})
 
-	for i, k := range keys {
-		v := m[k]
-		f(k, v, i)
-	}
+	return keys
 }
