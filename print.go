@@ -67,11 +67,12 @@ func printTable(resp *datadogV2.CostByOrgResponse, out io.Writer) {
 	header = append(header, months...)
 	table.SetHeader(header)
 
+	emptyLine := make([]string, len(months)+3)
+
 	for iCostByProduct, org := range util.MapSortKeys(cbd) {
 		costByProduct := cbd[org]
 
 		if iCostByProduct != 0 {
-			emptyLine := make([]string, len(months)+3)
 			table.Append(emptyLine)
 		}
 
