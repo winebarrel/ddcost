@@ -28,12 +28,12 @@ func main() {
 	client, err := ddcost.NewClient(&cli.Options)
 
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatal(err)
 	}
 
 	err = client.PrintHistoricalCostByOrg(os.Stdout)
 
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatal(err)
 	}
 }
