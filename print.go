@@ -18,7 +18,7 @@ func (c Cost) String() string {
 	return fmt.Sprintf("%.2f", c)
 }
 
-// charge_type/month/cost
+// month/cost
 type CostByMonth map[string]Cost
 
 // charge_type/month/cost
