@@ -69,25 +69,25 @@ func printTable(resp *datadogV2.CostByOrgResponse, out io.Writer) {
 
 	emptyLine := make([]string, len(months)+3)
 
-	for iCostByProduct, org := range util.MapSortKeys(cbd) {
+	for idxOrg, org := range util.MapSortKeys(cbd) {
 		costByProduct := cbd[org]
 
-		if iCostByProduct != 0 {
+		if idxOrg != 0 {
 			table.Append(emptyLine)
 		}
 
-		for iCostByProduct, product := range util.MapSortKeys(costByProduct) {
+		for idxProduct, product := range util.MapSortKeys(costByProduct) {
 			costByChargeType := costByProduct[product]
 
-			if iCostByProduct != 0 {
+			if idxProduct != 0 {
 				org = ""
 			}
 
-			for iCostByChargeType, chargeType := range util.MapSortKeys(costByChargeType) {
+			for idxChargeType, chargeType := range util.MapSortKeys(costByChargeType) {
 				costByMonth := costByChargeType[chargeType]
 				row := []string{"", "", chargeType}
 
-				if iCostByChargeType == 0 {
+				if idxChargeType == 0 {
 					row[0] = org
 					row[1] = product
 				}
@@ -115,18 +115,18 @@ func printTSV(resp *datadogV2.CostByOrgResponse, out io.Writer) {
 	for _, org := range util.MapSortKeys(cbd) {
 		costByProduct := cbd[org]
 
-		for iCostByProduct, product := range util.MapSortKeys(costByProduct) {
+		for idxProduct, product := range util.MapSortKeys(costByProduct) {
 			costByChargeType := costByProduct[product]
 
-			if iCostByProduct != 0 {
+			if idxProduct != 0 {
 				org = ""
 			}
 
-			for iCostByChargeType, chargeType := range util.MapSortKeys(costByChargeType) {
+			for idxChargeType, chargeType := range util.MapSortKeys(costByChargeType) {
 				costByMonth := costByChargeType[chargeType]
 				row := []string{"", "", chargeType}
 
-				if iCostByChargeType == 0 {
+				if idxChargeType == 0 {
 					row[0] = org
 					row[1] = product
 				}
