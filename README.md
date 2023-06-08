@@ -41,3 +41,9 @@ $ ddcost -v sub-org
                  |                     | on_demand   |    1.50 |    1.50 |    1.50 |    1.50 |    1.50
                  |                     | total       |    2.50 |    2.50 |    2.50 |    2.50 |    2.50
 ```
+
+## Installation
+
+```
+brew install winebarrel/ddcost/ddcost
+```
