@@ -2,26 +2,24 @@ package ddcost
 
 import (
 	"context"
+	"errors"
+	"fmt"
 	"io"
+	"time"
 
 	"github.com/DataDog/datadog-api-client-go/v2/api/datadog"
 	"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2"
+	"github.com/araddon/dateparse"
 )
 
 type Client struct {
-	options *Options
-	api     *datadogV2.UsageMeteringApi
+	options        *Options
+	api            *datadogV2.UsageMeteringApi
+	timeStartMonth time.Time
+	timeEndMonth   time.Time
 }
 
-func NewClient(options *Options) *Client {
-	if options.StartMonth.IsZero() {
-		options.StartMonth = defaultStartMonth
-	}
-
-	if options.EndMonth.IsZero() {
-		options.EndMonth = defaultEndMonth
-	}
-
+func NewClient(options *Options) (*Client, error) {
 	configuration := datadog.NewConfiguration()
 	apiClient := datadog.NewAPIClient(configuration)
 	api := datadogV2.NewUsageMeteringApi(apiClient)
@@ -31,7 +29,31 @@ func NewClient(options *Options) *Client {
 		api:     api,
 	}
 
-	return client
+	if options.StartMonth != "" {
+		t, err := dateparse.ParseAny(options.StartMonth)
+
+		if err != nil {
+			return nil, err
+		}
+
+		client.timeStartMonth = t
+	} else {
+		client.timeStartMonth = defaultStartMonth
+	}
+
+	if options.EndMonth != "" {
+		t, err := dateparse.ParseAny(options.EndMonth)
+
+		if err != nil {
+			return nil, err
+		}
+
+		client.timeEndMonth = t
+	} else {
+		client.timeEndMonth = defaultEndMonth
+	}
+
+	return client, nil
 }
 
 func (client *Client) withAPIKey(ctx context.Context) context.Context {
@@ -51,19 +73,25 @@ func (client *Client) withAPIKey(ctx context.Context) context.Context {
 	return ctx
 }
 
-func (client *Client) PrintHistoricalCostByOrg(out io.Writer) {
+func (client *Client) PrintHistoricalCostByOrg(out io.Writer) error {
 	ctx := client.withAPIKey(context.Background())
 
 	resp, _, err := client.api.GetHistoricalCostByOrg(
 		ctx,
-		client.options.StartMonth,
+		client.timeStartMonth,
 		*datadogV2.NewGetHistoricalCostByOrgOptionalParameters().
-			WithEndMonth(client.options.EndMonth).
+			WithEndMonth(client.timeEndMonth).
 			WithView(client.options.View),
 	)
 
 	if err != nil {
-		panic(err)
+		var dderr datadog.GenericOpenAPIError
+
+		if errors.As(err, &dderr) {
+			err = fmt.Errorf("%w: %s", err, dderr.ErrorBody)
+		}
+
+		return err
 	}
 
 	switch client.options.Output {
@@ -74,4 +102,6 @@ func (client *Client) PrintHistoricalCostByOrg(out io.Writer) {
 	case "json":
 		printJSON(&resp, out)
 	}
+
+	return nil
 }
