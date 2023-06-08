@@ -23,7 +23,7 @@ Flags:
 ```
 $ export DD_API_KEY=...
 $ export DD_APP_KEY=...
-$ ddcost -v sub-org
+$ ddcost -v sub-org -s 2022-12
        ORG       |       PRODUCT       | CHARGE TYPE | 2022-12 | 2023-01 | 2023-02 | 2023-03 | 2023-04
 -----------------+---------------------+-------------+---------+---------+---------+---------+----------
   organization1  | fargate_container   | committed   |    1.00 |    1.00 |    1.00 |    1.00 |    1.00
