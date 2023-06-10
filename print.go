@@ -18,6 +18,10 @@ func (c Cost) String() string {
 	return fmt.Sprintf("%.2f", c)
 }
 
+func (c Cost) Float64() float64 {
+	return float64(c)
+}
+
 // month/cost
 type CostByMonth map[string]Cost
 
@@ -67,40 +71,9 @@ func printTable(resp *datadogV2.CostByOrgResponse, out io.Writer) {
 	header = append(header, months...)
 	table.SetHeader(header)
 
-	emptyLine := make([]string, len(months)+3)
-
-	for idxOrg, org := range util.MapSortKeys(cbd) {
-		costByProduct := cbd[org]
-
-		if idxOrg != 0 {
-			table.Append(emptyLine)
-		}
-
-		for idxProduct, product := range util.MapSortKeys(costByProduct) {
-			costByChargeType := costByProduct[product]
-
-			if idxProduct != 0 {
-				org = ""
-			}
-
-			for idxChargeType, chargeType := range util.MapSortKeys(costByChargeType) {
-				costByMonth := costByChargeType[chargeType]
-				row := []string{"", "", chargeType}
-
-				if idxChargeType == 0 {
-					row[0] = org
-					row[1] = product
-				}
-
-				for _, m := range months {
-					cost := costByMonth[m]
-					row = append(row, cost.String())
-				}
-
-				table.Append(row)
-			}
-		}
-	}
+	printTable0(cbd, months, out, func(row []string) {
+		table.Append(row)
+	})
 
 	table.Render()
 }
@@ -112,8 +85,25 @@ func printTSV(resp *datadogV2.CostByOrgResponse, out io.Writer) {
 	header = append(header, months...)
 	fmt.Fprintln(out, strings.Join(header, "\t"))
 
-	for _, org := range util.MapSortKeys(cbd) {
+	printTable0(cbd, months, out, func(row []string) {
+		if strings.Join(row, "") != "" {
+			fmt.Fprintln(out, strings.Join(row, "\t"))
+		} else {
+			fmt.Fprintln(out)
+		}
+	})
+}
+
+func printTable0(cbd CostBreakdown, months []string, out io.Writer, procRow func([]string)) {
+	emptyLine := make([]string, len(months)+3)
+
+	for idxOrg, org := range util.MapSortKeys(cbd) {
 		costByProduct := cbd[org]
+		orgTotal := map[string]float64{}
+
+		if idxOrg != 0 {
+			procRow(emptyLine)
+		}
 
 		for idxProduct, product := range util.MapSortKeys(costByProduct) {
 			costByChargeType := costByProduct[product]
@@ -134,11 +124,24 @@ func printTSV(resp *datadogV2.CostByOrgResponse, out io.Writer) {
 				for _, m := range months {
 					cost := costByMonth[m]
 					row = append(row, cost.String())
+
+					if chargeType == "total" {
+						orgTotal[m] += cost.Float64()
+					}
 				}
 
-				fmt.Fprintln(out, strings.Join(row, "\t"))
+				procRow(row)
 			}
 		}
+
+		row := []string{"", "total", ""}
+
+		for _, m := range months {
+			cost := Cost(orgTotal[m])
+			row = append(row, cost.String())
+		}
+
+		procRow(row)
 	}
 }
 

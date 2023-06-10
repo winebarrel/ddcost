@@ -138,6 +138,7 @@ func TestSummaryTable(t *testing.T) {
 		"         | infra_host        | committed   |    0.00 |    0.00  ",
 		"         |                   | on_demand   |    1.00 |    1.00  ",
 		"         |                   | total       |    1.00 |    1.00  ",
+		"         | total             |             |    6.00 |    6.00  ",
 	}, "\n")+"\n", buf.String())
 }
 
@@ -355,6 +356,7 @@ func TestSubOrgTable(t *testing.T) {
 		"          | infra_host        | committed   |    0.00 |    0.00  ",
 		"          |                   | on_demand   |    1.00 |    1.00  ",
 		"          |                   | total       |    1.00 |    1.00  ",
+		"          | total             |             |    6.00 |    6.00  ",
 		"          |                   |             |         |          ",
 		"  my-org2 | fargate_container | committed   |    2.00 |    2.00  ",
 		"          |                   | on_demand   |    3.00 |    3.00  ",
@@ -362,6 +364,7 @@ func TestSubOrgTable(t *testing.T) {
 		"          | infra_host        | committed   |    0.00 |    0.00  ",
 		"          |                   | on_demand   |    1.00 |    1.00  ",
 		"          |                   | total       |    1.00 |    1.00  ",
+		"          | total             |             |    6.00 |    6.00  ",
 	}, "\n")+"\n", buf.String())
 }
 
@@ -578,12 +581,15 @@ my-org	fargate_container	committed	2.00	2.00
 	infra_host	committed	0.00	0.00
 		on_demand	1.00	1.00
 		total	1.00	1.00
+	total		6.00	6.00
+
 my-org2	fargate_container	committed	2.00	2.00
 		on_demand	3.00	3.00
 		total	5.00	5.00
 	infra_host	committed	0.00	0.00
 		on_demand	1.00	1.00
 		total	1.00	1.00
+	total		6.00	6.00
 `, buf.String())
 }
 
