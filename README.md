@@ -32,6 +32,7 @@ $ ddcost -v sub-org -s 2022-12
                  | logs_indexed_15day  | committed   |    0.00 |    0.00 |    0.00 |    0.00 |    0.00
                  |                     | on_demand   |    0.50 |    0.50 |    0.50 |    0.50 |    0.50
                  |                     | total       |    0.50 |    0.50 |    0.50 |    0.50 |    0.50
+                 | total               |             |    3.50 |    3.50 |    3.50 |    3.50 |    3.50
                  |                     |             |         |         |         |         |
   organization2  | infra_host          | committed   |   10.00 |   10.00 |   10.00 |   10.00 |   10.00
                  |                     | on_demand   |   20.00 |   20.00 |   20.00 |   20.00 |   20.00
@@ -39,6 +40,7 @@ $ ddcost -v sub-org -s 2022-12
                  | logs_indexed_15day  | committed   |    1.00 |    1.00 |    1.00 |    1.00 |    1.00
                  |                     | on_demand   |    1.50 |    1.50 |    1.50 |    1.50 |    1.50
                  |                     | total       |    2.50 |    2.50 |    2.50 |    2.50 |    2.50
+                 | total               |             |   32.50 |   32.50 |   32.50 |   32.50 |   32.50
 ```
 
 ## Installation
