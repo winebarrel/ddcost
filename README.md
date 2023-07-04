@@ -15,8 +15,9 @@ Flags:
       --app-key=STRING        Datadog APP key ($DD_APP_KEY).
   -v, --view="summary"        Cost breakdown view (summary, sub-org).
   -o, --output="table"        Formatting style for output (table, tsv, json).
-  -s, --start-month=STRING    Cost beginning this month (default: half a year ago).
-  -e, --end-month=STRING      Cost ending this month (default: this month).
+  -s, --start-month=STRING    Cost beginning this month.
+  -e, --end-month=STRING      Cost ending this month.
+      --estimate              Get estimated cost.
       --version
 ```
 
