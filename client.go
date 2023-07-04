@@ -115,9 +115,11 @@ func (client *Client) PrintHistoricalCostByOrg(out io.Writer) error {
 	case "table":
 		printTable(&resp, out)
 	case "tsv":
-		printTSV(&resp, out)
+		printTSV(&resp, out, "\t")
 	case "json":
 		printJSON(&resp, out)
+	case "csv":
+		printTSV(&resp, out, ",")
 	}
 
 	return nil

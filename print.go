@@ -78,16 +78,16 @@ func printTable(resp *datadogV2.CostByOrgResponse, out io.Writer) {
 	table.Render()
 }
 
-func printTSV(resp *datadogV2.CostByOrgResponse, out io.Writer) {
+func printTSV(resp *datadogV2.CostByOrgResponse, out io.Writer, sep string) {
 	cbd, months := breakdownCost(resp)
 
 	header := []string{"org", "product", "charge_type"}
 	header = append(header, months...)
-	fmt.Fprintln(out, strings.Join(header, "\t"))
+	fmt.Fprintln(out, strings.Join(header, sep))
 
 	printTable0(cbd, months, out, func(row []string) {
 		if strings.Join(row, "") != "" {
-			fmt.Fprintln(out, strings.Join(row, "\t"))
+			fmt.Fprintln(out, strings.Join(row, sep))
 		} else {
 			fmt.Fprintln(out)
 		}
