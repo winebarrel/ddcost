@@ -14,7 +14,7 @@ Flags:
       --api-key=STRING        Datadog API key ($DD_API_KEY).
       --app-key=STRING        Datadog APP key ($DD_APP_KEY).
   -v, --view="summary"        Cost breakdown view (summary, sub-org).
-  -o, --output="table"        Formatting style for output (table, tsv, json).
+  -o, --output="table"        Formatting style for output (table, tsv, json, csv).
   -s, --start-month=STRING    Cost beginning this month.
   -e, --end-month=STRING      Cost ending this month.
       --estimate              Get estimated cost.
