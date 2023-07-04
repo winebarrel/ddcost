@@ -37,6 +37,8 @@ func NewClient(options *Options) (*Client, error) {
 		}
 
 		client.timeStartMonth = t
+	} else if options.Estimate {
+		client.timeStartMonth = defaultEstimateStartMonth
 	} else {
 		client.timeStartMonth = defaultStartMonth
 	}
@@ -76,13 +78,24 @@ func (client *Client) withAPIKey(ctx context.Context) context.Context {
 func (client *Client) PrintHistoricalCostByOrg(out io.Writer) error {
 	ctx := client.withAPIKey(context.Background())
 
-	resp, _, err := client.api.GetHistoricalCostByOrg(
-		ctx,
-		client.timeStartMonth,
-		*datadogV2.NewGetHistoricalCostByOrgOptionalParameters().
-			WithEndMonth(client.timeEndMonth).
-			WithView(client.options.View),
-	)
+	var resp datadogV2.CostByOrgResponse
+	var err error
+
+	if client.options.Estimate {
+		resp, _, err = client.api.GetEstimatedCostByOrg(
+			ctx,
+			*datadogV2.NewGetEstimatedCostByOrgOptionalParameters().
+				WithStartMonth(client.timeStartMonth).WithEndMonth(client.timeEndMonth).WithView(client.options.View),
+		)
+	} else {
+		resp, _, err = client.api.GetHistoricalCostByOrg(
+			ctx,
+			client.timeStartMonth,
+			*datadogV2.NewGetHistoricalCostByOrgOptionalParameters().
+				WithEndMonth(client.timeEndMonth).
+				WithView(client.options.View),
+		)
+	}
 
 	if err != nil {
 		var dderr datadog.GenericOpenAPIError
