@@ -94,7 +94,9 @@ func (client *Client) PrintHistoricalCostByOrg(out io.Writer, options *PrintHist
 		resp, _, err = client.api.GetEstimatedCostByOrg(
 			ctx,
 			*datadogV2.NewGetEstimatedCostByOrgOptionalParameters().
-				WithStartMonth(timeStartMonth).WithEndMonth(timeEndMonth).WithView(options.View),
+				WithStartMonth(timeStartMonth).
+				WithEndMonth(timeEndMonth).
+				WithView(options.View),
 		)
 	} else {
 		resp, _, err = client.api.GetHistoricalCostByOrg(
