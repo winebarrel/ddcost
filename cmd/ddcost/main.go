@@ -10,8 +10,13 @@ import (
 
 var version string
 
+type options struct {
+	ddcost.ClientOptions
+	ddcost.PrintHistoricalCostByOrgOptions
+}
+
 var cli struct {
-	ddcost.Options
+	options
 	Version kong.VersionFlag
 }
 
@@ -25,13 +30,8 @@ func main() {
 		kong.Vars{"version": version},
 	)
 
-	client, err := ddcost.NewClient(&cli.Options)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = client.PrintHistoricalCostByOrg(os.Stdout)
+	client := ddcost.NewClient(&cli.ClientOptions)
+	err := client.PrintHistoricalCostByOrg(os.Stdout, &cli.PrintHistoricalCostByOrgOptions)
 
 	if err != nil {
 		log.Fatal(err)
