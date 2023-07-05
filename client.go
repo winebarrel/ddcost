@@ -13,13 +13,11 @@ import (
 )
 
 type Client struct {
-	options        *Options
-	api            *datadogV2.UsageMeteringApi
-	timeStartMonth time.Time
-	timeEndMonth   time.Time
+	options *ClientOptions
+	api     *datadogV2.UsageMeteringApi
 }
 
-func NewClient(options *Options) (*Client, error) {
+func NewClient(options *ClientOptions) *Client {
 	configuration := datadog.NewConfiguration()
 	apiClient := datadog.NewAPIClient(configuration)
 	api := datadogV2.NewUsageMeteringApi(apiClient)
@@ -29,33 +27,7 @@ func NewClient(options *Options) (*Client, error) {
 		api:     api,
 	}
 
-	if options.StartMonth != "" {
-		t, err := dateparse.ParseAny(options.StartMonth)
-
-		if err != nil {
-			return nil, err
-		}
-
-		client.timeStartMonth = t
-	} else if options.Estimate {
-		client.timeStartMonth = defaultEstimateStartMonth
-	} else {
-		client.timeStartMonth = defaultStartMonth
-	}
-
-	if options.EndMonth != "" {
-		t, err := dateparse.ParseAny(options.EndMonth)
-
-		if err != nil {
-			return nil, err
-		}
-
-		client.timeEndMonth = t
-	} else {
-		client.timeEndMonth = defaultEndMonth
-	}
-
-	return client, nil
+	return client
 }
 
 func (client *Client) withAPIKey(ctx context.Context) context.Context {
@@ -75,25 +47,62 @@ func (client *Client) withAPIKey(ctx context.Context) context.Context {
 	return ctx
 }
 
-func (client *Client) PrintHistoricalCostByOrg(out io.Writer) error {
+func calcPeriod(options *PrintHistoricalCostByOrgOptions) (time.Time, time.Time, error) {
+	var timeStartMonth time.Time
+	var timeEndMonth time.Time
+
+	if options.StartMonth != "" {
+		t, err := dateparse.ParseAny(options.StartMonth)
+
+		if err != nil {
+			return timeStartMonth, timeEndMonth, err
+		}
+
+		timeStartMonth = t
+	} else if options.Estimate {
+		timeStartMonth = defaultEstimateStartMonth
+	} else {
+		timeStartMonth = defaultStartMonth
+	}
+
+	if options.EndMonth != "" {
+		t, err := dateparse.ParseAny(options.EndMonth)
+
+		if err != nil {
+			return timeStartMonth, timeEndMonth, err
+		}
+
+		timeEndMonth = t
+	} else {
+		timeEndMonth = defaultEndMonth
+	}
+
+	return timeStartMonth, timeEndMonth, nil
+}
+
+func (client *Client) PrintHistoricalCostByOrg(out io.Writer, options *PrintHistoricalCostByOrgOptions) error {
+	timeStartMonth, timeEndMonth, err := calcPeriod(options)
+
+	if err != nil {
+		return err
+	}
+
 	ctx := client.withAPIKey(context.Background())
-
 	var resp datadogV2.CostByOrgResponse
-	var err error
 
-	if client.options.Estimate {
+	if options.Estimate {
 		resp, _, err = client.api.GetEstimatedCostByOrg(
 			ctx,
 			*datadogV2.NewGetEstimatedCostByOrgOptionalParameters().
-				WithStartMonth(client.timeStartMonth).WithEndMonth(client.timeEndMonth).WithView(client.options.View),
+				WithStartMonth(timeStartMonth).WithEndMonth(timeEndMonth).WithView(options.View),
 		)
 	} else {
 		resp, _, err = client.api.GetHistoricalCostByOrg(
 			ctx,
-			client.timeStartMonth,
+			timeStartMonth,
 			*datadogV2.NewGetHistoricalCostByOrgOptionalParameters().
-				WithEndMonth(client.timeEndMonth).
-				WithView(client.options.View),
+				WithEndMonth(timeEndMonth).
+				WithView(options.View),
 		)
 	}
 
@@ -111,7 +120,7 @@ func (client *Client) PrintHistoricalCostByOrg(out io.Writer) error {
 		return errors.New("no data")
 	}
 
-	switch client.options.Output {
+	switch options.Output {
 	case "table":
 		printTable(&resp, out)
 	case "tsv":
