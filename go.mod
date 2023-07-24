@@ -3,7 +3,7 @@ module github.com/winebarrel/ddcost
 go 1.20
 
 require (
-	github.com/DataDog/datadog-api-client-go/v2 v2.14.0
+	github.com/DataDog/datadog-api-client-go/v2 v2.15.0
 	github.com/alecthomas/assert v1.0.0
 	github.com/alecthomas/kong v0.8.0
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
@@ -18,6 +18,7 @@ require (
 	github.com/alecthomas/colour v0.1.0 // indirect
 	github.com/alecthomas/repr v0.1.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mattn/go-runewidth v0.0.10 // indirect
