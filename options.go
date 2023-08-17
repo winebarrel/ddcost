@@ -11,8 +11,7 @@ var (
 )
 
 func init() {
-	now := time.Now()
-	defaultEndMonth = now.AddDate(0, 0, -now.Day()+1)
+	defaultEndMonth = time.Now()
 	defaultStartMonth = defaultEndMonth.AddDate(0, -6, 0)
 	defaultEstimateStartMonth = defaultEndMonth.AddDate(0, -2, 0)
 }
