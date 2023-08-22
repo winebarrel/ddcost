@@ -7,7 +7,7 @@ require (
 	github.com/alecthomas/assert v1.0.0
 	github.com/alecthomas/kong v0.8.0
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
-	github.com/jarcoal/httpmock v1.3.0
+	github.com/jarcoal/httpmock v1.3.1
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/exp v0.0.0-20220303212507-bbda1eaf7a17
