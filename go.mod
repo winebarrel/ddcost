@@ -3,7 +3,7 @@ module github.com/winebarrel/ddcost
 go 1.20
 
 require (
-	github.com/DataDog/datadog-api-client-go/v2 v2.16.0
+	github.com/DataDog/datadog-api-client-go/v2 v2.17.0
 	github.com/alecthomas/assert v1.0.0
 	github.com/alecthomas/kong v0.8.0
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
