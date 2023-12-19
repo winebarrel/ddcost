@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2"
+	"github.com/dustin/go-humanize"
 	"github.com/olekukonko/tablewriter"
 	"github.com/winebarrel/ddcost/internal/util"
 )
@@ -14,7 +15,7 @@ import (
 type Cost float64
 
 func (c Cost) String() string {
-	return fmt.Sprintf("%.2f", c)
+	return humanize.FtoaWithDigits(float64(c), 2)
 }
 
 func (c Cost) Float64() float64 {

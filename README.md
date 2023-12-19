@@ -27,18 +27,18 @@ $ export DD_APP_KEY=...
 $ ddcost -v sub-org -s 2022-12
        ORG       |       PRODUCT       | CHARGE TYPE | 2022-12 | 2023-01 | 2023-02 | 2023-03 | 2023-04
 -----------------+---------------------+-------------+---------+---------+---------+---------+----------
-  organization1  | fargate_container   | committed   |    1.00 |    1.00 |    1.00 |    1.00 |    1.00
-                 |                     | on_demand   |    2.00 |    2.00 |    2.00 |    2.00 |    2.00
-                 |                     | total       |    3.00 |    3.00 |    3.00 |    3.00 |    3.00
-                 | logs_indexed_15day  | committed   |    0.00 |    0.00 |    0.00 |    0.00 |    0.00
+  organization1  | fargate_container   | committed   |       1 |       1 |       1 |       1 |       1
+                 |                     | on_demand   |       2 |       2 |       2 |       2 |       2
+                 |                     | total       |       3 |       3 |       3 |       3 |       3
+                 | logs_indexed_15day  | committed   |       0 |       0 |       0 |       0 |       0
                  |                     | on_demand   |    0.50 |    0.50 |    0.50 |    0.50 |    0.50
                  |                     | total       |    0.50 |    0.50 |    0.50 |    0.50 |    0.50
                  | total               |             |    3.50 |    3.50 |    3.50 |    3.50 |    3.50
                  |                     |             |         |         |         |         |
-  organization2  | infra_host          | committed   |   10.00 |   10.00 |   10.00 |   10.00 |   10.00
-                 |                     | on_demand   |   20.00 |   20.00 |   20.00 |   20.00 |   20.00
-                 |                     | total       |   30.00 |   30.00 |   30.00 |   30.00 |   30.00
-                 | logs_indexed_15day  | committed   |    1.00 |    1.00 |    1.00 |    1.00 |    1.00
+  organization2  | infra_host          | committed   |      10 |      10 |      10 |      10 |      10
+                 |                     | on_demand   |      20 |      20 |      20 |      20 |      20
+                 |                     | total       |      30 |      30 |      30 |      30 |      30
+                 | logs_indexed_15day  | committed   |       1 |       1 |       1 |       1 |       1
                  |                     | on_demand   |    1.50 |    1.50 |    1.50 |    1.50 |    1.50
                  |                     | total       |    2.50 |    2.50 |    2.50 |    2.50 |    2.50
                  | total               |             |   32.50 |   32.50 |   32.50 |   32.50 |   32.50

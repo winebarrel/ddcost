@@ -133,13 +133,13 @@ func TestSummaryTable(t *testing.T) {
 	assert.Equal(strings.Join([]string{
 		"   ORG   |      PRODUCT      | CHARGE TYPE | 2023-04 | 2023-05  ",
 		"---------+-------------------+-------------+---------+----------",
-		"  my-org | fargate_container | committed   |    2.00 |    2.00  ",
-		"         |                   | on_demand   |    3.00 |    3.00  ",
-		"         |                   | total       |    5.00 |    5.00  ",
-		"         | infra_host        | committed   |    0.00 |    0.00  ",
-		"         |                   | on_demand   |    1.00 |    1.00  ",
-		"         |                   | total       |    1.00 |    1.00  ",
-		"         | total             |             |    6.00 |    6.00  ",
+		"  my-org | fargate_container | committed   |       2 |       2  ",
+		"         |                   | on_demand   |       3 |       3  ",
+		"         |                   | total       |       5 |       5  ",
+		"         | infra_host        | committed   |       0 |       0  ",
+		"         |                   | on_demand   |       1 |       1  ",
+		"         |                   | total       |       1 |       1  ",
+		"         | total             |             |       6 |       6  ",
 	}, "\n")+"\n", buf.String())
 }
 
@@ -266,13 +266,13 @@ func TestSummaryTableEstimate(t *testing.T) {
 	assert.Equal(strings.Join([]string{
 		"   ORG   |      PRODUCT      | CHARGE TYPE | 2023-04 | 2023-05  ",
 		"---------+-------------------+-------------+---------+----------",
-		"  my-org | fargate_container | committed   |    2.00 |    2.00  ",
-		"         |                   | on_demand   |    3.00 |    3.00  ",
-		"         |                   | total       |    5.00 |    5.00  ",
-		"         | infra_host        | committed   |    0.00 |    0.00  ",
-		"         |                   | on_demand   |    1.00 |    1.00  ",
-		"         |                   | total       |    1.00 |    1.00  ",
-		"         | total             |             |    6.00 |    6.00  ",
+		"  my-org | fargate_container | committed   |       2 |       2  ",
+		"         |                   | on_demand   |       3 |       3  ",
+		"         |                   | total       |       5 |       5  ",
+		"         | infra_host        | committed   |       0 |       0  ",
+		"         |                   | on_demand   |       1 |       1  ",
+		"         |                   | total       |       1 |       1  ",
+		"         | total             |             |       6 |       6  ",
 	}, "\n")+"\n", buf.String())
 }
 
@@ -484,21 +484,21 @@ func TestSubOrgTable(t *testing.T) {
 	assert.Equal(strings.Join([]string{
 		"    ORG   |      PRODUCT      | CHARGE TYPE | 2023-04 | 2023-05  ",
 		"----------+-------------------+-------------+---------+----------",
-		"  my-org  | fargate_container | committed   |    2.00 |    2.00  ",
-		"          |                   | on_demand   |    3.00 |    3.00  ",
-		"          |                   | total       |    5.00 |    5.00  ",
-		"          | infra_host        | committed   |    0.00 |    0.00  ",
-		"          |                   | on_demand   |    1.00 |    1.00  ",
-		"          |                   | total       |    1.00 |    1.00  ",
-		"          | total             |             |    6.00 |    6.00  ",
+		"  my-org  | fargate_container | committed   |       2 |       2  ",
+		"          |                   | on_demand   |       3 |       3  ",
+		"          |                   | total       |       5 |       5  ",
+		"          | infra_host        | committed   |       0 |       0  ",
+		"          |                   | on_demand   |       1 |       1  ",
+		"          |                   | total       |       1 |       1  ",
+		"          | total             |             |       6 |       6  ",
 		"          |                   |             |         |          ",
-		"  my-org2 | fargate_container | committed   |    2.00 |    2.00  ",
-		"          |                   | on_demand   |    3.00 |    3.00  ",
-		"          |                   | total       |    5.00 |    5.00  ",
-		"          | infra_host        | committed   |    0.00 |    0.00  ",
-		"          |                   | on_demand   |    1.00 |    1.00  ",
-		"          |                   | total       |    1.00 |    1.00  ",
-		"          | total             |             |    6.00 |    6.00  ",
+		"  my-org2 | fargate_container | committed   |       2 |       2  ",
+		"          |                   | on_demand   |       3 |       3  ",
+		"          |                   | total       |       5 |       5  ",
+		"          | infra_host        | committed   |       0 |       0  ",
+		"          |                   | on_demand   |       1 |       1  ",
+		"          |                   | total       |       1 |       1  ",
+		"          | total             |             |       6 |       6  ",
 	}, "\n")+"\n", buf.String())
 }
 
@@ -709,21 +709,21 @@ func TestSubOrgTSV(t *testing.T) {
 	require.NoError(err)
 
 	assert.Equal(`org	product	charge_type	2023-04	2023-05
-my-org	fargate_container	committed	2.00	2.00
-		on_demand	3.00	3.00
-		total	5.00	5.00
-	infra_host	committed	0.00	0.00
-		on_demand	1.00	1.00
-		total	1.00	1.00
-	total		6.00	6.00
+my-org	fargate_container	committed	2	2
+		on_demand	3	3
+		total	5	5
+	infra_host	committed	0	0
+		on_demand	1	1
+		total	1	1
+	total		6	6
 
-my-org2	fargate_container	committed	2.00	2.00
-		on_demand	3.00	3.00
-		total	5.00	5.00
-	infra_host	committed	0.00	0.00
-		on_demand	1.00	1.00
-		total	1.00	1.00
-	total		6.00	6.00
+my-org2	fargate_container	committed	2	2
+		on_demand	3	3
+		total	5	5
+	infra_host	committed	0	0
+		on_demand	1	1
+		total	1	1
+	total		6	6
 `, buf.String())
 }
 
@@ -934,21 +934,21 @@ func TestSubOrgCSV(t *testing.T) {
 	require.NoError(err)
 
 	assert.Equal(`org,product,charge_type,2023-04,2023-05
-my-org,fargate_container,committed,2.00,2.00
-,,on_demand,3.00,3.00
-,,total,5.00,5.00
-,infra_host,committed,0.00,0.00
-,,on_demand,1.00,1.00
-,,total,1.00,1.00
-,total,,6.00,6.00
+my-org,fargate_container,committed,2,2
+,,on_demand,3,3
+,,total,5,5
+,infra_host,committed,0,0
+,,on_demand,1,1
+,,total,1,1
+,total,,6,6
 
-my-org2,fargate_container,committed,2.00,2.00
-,,on_demand,3.00,3.00
-,,total,5.00,5.00
-,infra_host,committed,0.00,0.00
-,,on_demand,1.00,1.00
-,,total,1.00,1.00
-,total,,6.00,6.00
+my-org2,fargate_container,committed,2,2
+,,on_demand,3,3
+,,total,5,5
+,infra_host,committed,0,0
+,,on_demand,1,1
+,,total,1,1
+,total,,6,6
 `, buf.String())
 }
 
