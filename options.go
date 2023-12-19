@@ -32,8 +32,8 @@ type PrintHistoricalCostByOrgOptions struct {
 }
 
 func (options *PrintHistoricalCostByOrgOptions) calcPeriod() (time.Time, time.Time, error) {
-	var timeStartMonth time.Time
-	var timeEndMonth time.Time
+	timeStartMonth := defaultStartMonth
+	timeEndMonth := defaultEndMonth
 
 	if options.StartMonth != "" {
 		t, err := dateparse.ParseAny(options.StartMonth)
@@ -45,8 +45,6 @@ func (options *PrintHistoricalCostByOrgOptions) calcPeriod() (time.Time, time.Ti
 		timeStartMonth = t
 	} else if options.Estimate {
 		timeStartMonth = defaultEstimateStartMonth
-	} else {
-		timeStartMonth = defaultStartMonth
 	}
 
 	if options.EndMonth != "" {
@@ -57,8 +55,6 @@ func (options *PrintHistoricalCostByOrgOptions) calcPeriod() (time.Time, time.Ti
 		}
 
 		timeEndMonth = t
-	} else {
-		timeEndMonth = defaultEndMonth
 	}
 
 	return timeStartMonth, timeEndMonth, nil
