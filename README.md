@@ -49,3 +49,7 @@ $ ddcost -v sub-org -s 2022-12
 ```
 brew install winebarrel/ddcost/ddcost
 ```
+
+## Related Links
+
+- https://github.com/winebarrel/ddusage
