@@ -2,6 +2,8 @@ package ddcost
 
 import (
 	"time"
+
+	"github.com/araddon/dateparse"
 )
 
 var (
@@ -27,4 +29,37 @@ type PrintHistoricalCostByOrgOptions struct {
 	StartMonth string `short:"s" help:"Cost beginning this month."`
 	EndMonth   string `short:"e" help:"Cost ending this month."`
 	Estimate   bool   `default:"false" help:"Get estimated cost."`
+}
+
+func (options *PrintHistoricalCostByOrgOptions) calcPeriod() (time.Time, time.Time, error) {
+	var timeStartMonth time.Time
+	var timeEndMonth time.Time
+
+	if options.StartMonth != "" {
+		t, err := dateparse.ParseAny(options.StartMonth)
+
+		if err != nil {
+			return timeStartMonth, timeEndMonth, err
+		}
+
+		timeStartMonth = t
+	} else if options.Estimate {
+		timeStartMonth = defaultEstimateStartMonth
+	} else {
+		timeStartMonth = defaultStartMonth
+	}
+
+	if options.EndMonth != "" {
+		t, err := dateparse.ParseAny(options.EndMonth)
+
+		if err != nil {
+			return timeStartMonth, timeEndMonth, err
+		}
+
+		timeEndMonth = t
+	} else {
+		timeEndMonth = defaultEndMonth
+	}
+
+	return timeStartMonth, timeEndMonth, nil
 }

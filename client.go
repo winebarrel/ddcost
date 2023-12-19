@@ -5,11 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"time"
 
 	"github.com/DataDog/datadog-api-client-go/v2/api/datadog"
 	"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2"
-	"github.com/araddon/dateparse"
 )
 
 type Client struct {
@@ -47,41 +45,8 @@ func (client *Client) withAPIKey(ctx context.Context) context.Context {
 	return ctx
 }
 
-func calcPeriod(options *PrintHistoricalCostByOrgOptions) (time.Time, time.Time, error) {
-	var timeStartMonth time.Time
-	var timeEndMonth time.Time
-
-	if options.StartMonth != "" {
-		t, err := dateparse.ParseAny(options.StartMonth)
-
-		if err != nil {
-			return timeStartMonth, timeEndMonth, err
-		}
-
-		timeStartMonth = t
-	} else if options.Estimate {
-		timeStartMonth = defaultEstimateStartMonth
-	} else {
-		timeStartMonth = defaultStartMonth
-	}
-
-	if options.EndMonth != "" {
-		t, err := dateparse.ParseAny(options.EndMonth)
-
-		if err != nil {
-			return timeStartMonth, timeEndMonth, err
-		}
-
-		timeEndMonth = t
-	} else {
-		timeEndMonth = defaultEndMonth
-	}
-
-	return timeStartMonth, timeEndMonth, nil
-}
-
 func (client *Client) PrintHistoricalCostByOrg(out io.Writer, options *PrintHistoricalCostByOrgOptions) error {
-	timeStartMonth, timeEndMonth, err := calcPeriod(options)
+	timeStartMonth, timeEndMonth, err := options.calcPeriod()
 
 	if err != nil {
 		return err
