@@ -15,16 +15,16 @@ type options struct {
 	ddcost.PrintHistoricalCostByOrgOptions
 }
 
-var cli struct {
-	options
-	Version kong.VersionFlag
-}
-
 func init() {
 	log.SetFlags(0)
 }
 
 func main() {
+	var cli struct {
+		options
+		Version kong.VersionFlag
+	}
+
 	kong.Parse(
 		&cli,
 		kong.Vars{"version": version},
