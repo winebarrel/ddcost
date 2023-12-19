@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"sort"
 	"strings"
 
 	"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2"
@@ -51,14 +50,7 @@ func breakdownCost(resp *datadogV2.CostByOrgResponse) (CostBreakdown, []string) 
 		}
 	}
 
-	ms := []string{}
-
-	for m := range monthSet {
-		ms = append(ms, m)
-	}
-
-	sort.Strings(ms)
-	return cbd, ms
+	return cbd, util.MapSortKeys(monthSet)
 }
 
 func printTable(resp *datadogV2.CostByOrgResponse, out io.Writer) {
