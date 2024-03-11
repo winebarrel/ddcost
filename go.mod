@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/DataDog/datadog-api-client-go/v2 v2.23.0
 	github.com/alecthomas/assert v1.0.0
-	github.com/alecthomas/kong v0.8.1
+	github.com/alecthomas/kong v0.9.0
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/dustin/go-humanize v1.0.1
 	github.com/jarcoal/httpmock v1.3.1
@@ -17,7 +17,7 @@ require (
 require (
 	github.com/DataDog/zstd v1.5.2 // indirect
 	github.com/alecthomas/colour v0.1.0 // indirect
-	github.com/alecthomas/repr v0.1.0 // indirect
+	github.com/alecthomas/repr v0.4.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
