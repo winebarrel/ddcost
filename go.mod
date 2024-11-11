@@ -5,9 +5,9 @@ go 1.22
 toolchain go1.23.2
 
 require (
-	github.com/DataDog/datadog-api-client-go/v2 v2.31.0
+	github.com/DataDog/datadog-api-client-go/v2 v2.32.0
 	github.com/alecthomas/assert v1.0.0
-	github.com/alecthomas/kong v1.3.0
+	github.com/alecthomas/kong v1.4.0
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/dustin/go-humanize v1.0.1
 	github.com/jarcoal/httpmock v1.3.1
