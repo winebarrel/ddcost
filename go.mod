@@ -6,10 +6,10 @@ toolchain go1.24.1
 require (
 	github.com/DataDog/datadog-api-client-go/v2 v2.36.1
 	github.com/alecthomas/assert v1.0.0
-	github.com/alecthomas/kong v1.9.0
+	github.com/alecthomas/kong v1.10.0
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/dustin/go-humanize v1.0.1
-	github.com/jarcoal/httpmock v1.3.1
+	github.com/jarcoal/httpmock v1.4.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/exp v0.0.0-20220303212507-bbda1eaf7a17
