@@ -9,5 +9,16 @@
   ],
   "vulnerabilityAlerts": {
     "enabled": true
-  }
+  },
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "pgautoupgrade/pgautoupgrade"
+      ],
+      "matchManagers": [
+        "gomod"
+      ],
+      "allowedVersions": "< 1.0.0"
+    }
+  ]
 }
