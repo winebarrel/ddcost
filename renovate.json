@@ -13,7 +13,7 @@
   "packageRules": [
     {
       "matchPackageNames": [
-        "pgautoupgrade/pgautoupgrade"
+        "github.com/olekukonko/tablewriter"
       ],
       "matchManagers": [
         "gomod"
