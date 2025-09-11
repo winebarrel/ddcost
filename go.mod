@@ -12,7 +12,7 @@ require (
 	github.com/jarcoal/httpmock v1.4.1
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/stretchr/testify v1.11.1
-	golang.org/x/exp v0.0.0-20250819193227-8b4c13bb791b
+	golang.org/x/exp v0.0.0-20250911091902-df9299821621
 )
 
 require (
