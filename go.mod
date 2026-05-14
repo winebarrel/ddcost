@@ -1,6 +1,6 @@
 module github.com/winebarrel/ddcost
 
-go 1.24.0
+go 1.25.0
 
 toolchain go1.25.6
 
@@ -12,7 +12,7 @@ require (
 	github.com/jarcoal/httpmock v1.4.1
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/stretchr/testify v1.11.1
-	golang.org/x/exp v0.0.0-20260112195511-716be5621a96
+	golang.org/x/exp v0.0.0-20260508232706-74f9aab9d74a
 )
 
 require (
