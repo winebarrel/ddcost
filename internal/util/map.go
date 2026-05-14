@@ -1,9 +1,8 @@
 package util
 
 import (
+	"cmp"
 	"sort"
-
-	"golang.org/x/exp/constraints"
 )
 
 func MapValueOrDefault[K comparable, V any](m map[K]V, key K, defval V) V {
@@ -17,7 +16,7 @@ func MapValueOrDefault[K comparable, V any](m map[K]V, key K, defval V) V {
 	return v
 }
 
-func MapSortKeys[K constraints.Ordered, V any](m map[K]V) []K {
+func MapSortKeys[K cmp.Ordered, V any](m map[K]V) []K {
 	keys := []K{}
 
 	for k := range m {
