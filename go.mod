@@ -9,7 +9,7 @@ require (
 	github.com/alecthomas/kong v1.16.0
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/dustin/go-humanize v1.0.1
-	github.com/jarcoal/httpmock v1.4.1
+	github.com/jarcoal/httpmock v1.4.2
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/stretchr/testify v1.11.1
 )
