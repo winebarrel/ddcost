@@ -2,7 +2,7 @@ module github.com/winebarrel/ddcost
 
 go 1.25.0
 
-toolchain go1.26.7
+toolchain go1.27.0
 
 require (
 	github.com/DataDog/datadog-api-client-go/v2 v2.64.0
