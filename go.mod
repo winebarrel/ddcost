@@ -6,7 +6,7 @@ toolchain go1.27.3
 
 require (
 	github.com/DataDog/datadog-api-client-go/v2 v2.67.0
-	github.com/alecthomas/kong v1.16.1
+	github.com/alecthomas/kong v1.17.0
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/dustin/go-humanize v1.1.0
 	github.com/jarcoal/httpmock v1.4.2
